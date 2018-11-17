@@ -1,30 +1,29 @@
 # Exception Handling
-`JVM` нь програм ажилаж буй явцад Java програмчилал хэлийн хувьд утга зүй нь алдаа гаргсан үед алдаатай байгааг програмт `exception` байдалаар илгээдэг.
-Энэ гарсан алдааг Java хэлд проррамистын тодорхойлж өгсөн газар руу нь ажилгаагаа шилжүүлнэ.
-`Exception`-г `throw` буюу алдаа гарсан газараас шидээд түүнийг бариж авах газарт программын ажилгаагаа шилжүүлнэ.
+`JVM` нь програм ажиллах явцад Java програмчлал хэлний хувьд утга зүйн алдаа гаргасан үед алдаатай байгааг програмд тайлбар (`exception`) байдалаар илгээдэг.
+Энэ гарсан алдааг Java хэлэнд програмистын тодорхойлж өгсөн газар руу нь програмын удирдлагыг шилжүүлнэ.
 
-Java хэлны хувьд `Throwable`-н яг доодох `subclass` нь `Exception` болон `Error` байна. Тэд нар нь бас доод доороо өөрийн гэсэн `subclass`уудтай байна. Үүнийг доорох зурагаас харна уу.
+Java хэлний хувьд `Throwable`-н яг доод тал дахь `subclass`-ууд нь `Exception` болон `Error` байна. Тэд нар нь бас доор доороо өөрийн гэсэн `subclass`-уудтай байна. Үүнийг доорх зурагаас харна уу.
 ![Java Exception Hierarchy](exception_java.png)
 
-Бүх гарч болохүйц `exception` нь `Throwable` болон үүний `subclass`уудаас байна. Энэ объект нь тухай нь `exception` үүссэнээс хойш явар шийдэх `handler` таарах хүртлэх бүх мэдээлэлийг хадагалан.
+Бүх гарч болохуйц `exception` нь `Throwable` болон үүний `subclass`-уудаас байна. Энэ объект нь тухайн `exception` үүссэнээс хойш түүнийг шийдэх `handler` таарах хүртлэх бүх мэдээлэлийг хадагалан.
 
-Ямар нэгэн `exception` гарасан үед `JVM` нь огцом нэг нэгээр нь хийгдэх үйлдэлэлээ эхлүүдэг, харин ажилаж байгаа `thread`дээ гүйтгэн дуусгах албгүй. Энэ процесс нь түүнийг шийдэх `handler` ,тухайн нь `exception`-н классын нэр эсвэл түүний `superclass`-н нэр, олдох хүртэл үргэлжилнэ. Хэрэв ямар нэгэн `handler` байхгүй үед автоматаар `uncaught exception handler`-т удирлагаа шилжүүлнэ. Ингэснээр програмт гарж болохуйц бүх `exception` шийдэхгүйгээр ажилуулахгүй.
+Ямар нэгэн `exception` шидэх үед `JVM` нь нэг нэгээр нь хийх үйлдлээ эхлүүлдэг, харин ажиллаж байгаа үйлдлээ (any expressions, statements, method and constructor invocations, initializers, and field initialization expressions) гүйцэт дуусгах албагүй. Энэ процесс нь түүнийг шийдэх `handler` ,тухайн  `exception`-ийн классын нэр эсвэл түүний `superclass`-н нэр олдох хүртэл үргэлжилнэ. Хэрэв ямар нэгэн `handler` байхгүй бол автоматаар `uncaught exception handler`-т удирлагаа шилжүүлнэ.
 
-## `Exception`ны төрөл
+## `Exception`-ийн төрөл
 
-`Exception` болон `Error` нь `Throwable`ын яг доод `subclass` юм.
-- `Exception` нь бүх энгийн програм сэргэхийг хүсэх `exception`ны `superclass` юм.
-- `Error` нь бүх энгийн програм дахин сэргэх боломжгүй `exception`ны `superclass` юм.
+`Exception` болон `Error` нь `Throwable`-ийн яг доод талын `subclass` юм.
+- `Exception` нь сэргээгдэж болох бүх алдаануудын `superclass` юм.
+- `Error` нь сэргээгдэх боломжгүй бүх алдаануудын `superclass` юм.
 - `unchecked exception` нь бүх `RuntimeException` болон `Error` классууд юм.
-    - Компайл хийгдэж байгаа үед шалгахгүй харин, програм ажилж буй үед гарч ирдэг `exception` юм.
-    Жишээ: NullPointerException
+    - Компайл хийгдэж байгаа үед шалгахгүй, харин програм ажиллаж буй үед гарч ирдэг `exception` юм.
+    Жишээ нь: NullPointerException
     ```Java{.line-numbers}
     Object obj = null;
     obj.toString();  // This statement will throw a NullPointerException
     ```
 - `checked exception` нь үлдсэн бүх класс юм.
-    - Компайл хийгдэж байгаа шалагдаг ба түүнийг `throw` эсвэл `try ... catch` хйих ёстой.
-    Жишээ: java.io.IOException
+    - Компайл хийгдэж байгаа үед шалгадаг ба түүнийг `throw` эсвэл `try ... catch` хйих ёстой.
+    Жишээ нь: java.io.IOException
     ```Java{.line-numbers}
     public void ioOperation(boolean isResourceAvailable) {
     if (!isResourceAvailable) {
@@ -32,7 +31,7 @@ Java хэлны хувьд `Throwable`-н яг доодох `subclass` нь `Exc
         }
     }
     ```
-    Дээрэх код койпайлдахгүй, яагаад гэвэл энэ код нь алдаа гарч болно гэвч түүнийгээ аргалаагүй. Үүнийг хочр яанзаар засаж болно.
+    Дээрх код компайл хийгдэхгүй, яагаад гэвэл энэ кодонд алдаа гарч болох боловч түүнийгээ шийдээгүй. Үүнийг хоёр янзаар засч болно.
     1. `try catch` ашиглах
     ```Java{.line-numbers}
     public void ioOperation(boolean isResourceAvailable) {
@@ -45,7 +44,7 @@ Java хэлны хувьд `Throwable`-н яг доодох `subclass` нь `Exc
         }
     }
     ```
-    2. `throw` ашиглах
+    1. `throw` ашиглах
     ```Java{.line-numbers}
     public void ioOperation(boolean isResourceAvailable) throws IOException {
         if (!isResourceAvailable) {
@@ -54,10 +53,10 @@ Java хэлны хувьд `Throwable`-н яг доодох `subclass` нь `Exc
     }
     ```
 
-## `Exception`ны үүсэх шалтгаан
-- `Throw` statement ажилхад
-- `JVM`-д шалагдсан гажиг явц
-    - Java хэлны утга зүйн хувьд алдаатай, тоог тэгт хуваах
+## `Exception`-ны үүсэх шалтгаан
+- `Throw` statement ажиллахад
+- `JVM`-д шалгагдсан доголдолтой явц
+    - Java хэлний утга зүйн хувьд алдаатай, тоог тэгт хуваах
     - `LinkageError` үүссэн үед
     - Дотоод нөөц дууссан үлмаас алдаа заах
   
