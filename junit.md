@@ -1,12 +1,12 @@
 # [Junit 5](https://junit.org/junit5/docs/current/user-guide/#overview)
 ## Junit = Platform + Jupiter + Vintage
 - Junit Platform
-    - `JVM`-д тест хийх фрамворкыг эхлүүлэх суурь
+    - `JVM`-д тест хийх framework-ийг эхлүүлэх суурь
     - Эхлүүлэгч болон `TestEngine API`
         - [TestEngine](https://junit.org/junit5/docs/current/api/org/junit/platform/engine/TestEngine.html) нь `JUnit Jupiter` хэл дээр бичигдсэн тестыг олож ажилуулах
-    - [Console Launcher](https://junit.org/junit5/docs/current/user-guide/#running-tests-console-launcher), [Grandle](https://junit.org/junit5/docs/current/user-guide/#running-tests-build-gradle), [Maven](https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven) ашиглан тест эхлүүхэх боломжтой
+    - [Console Launcher](https://junit.org/junit5/docs/current/user-guide/#running-tests-console-launcher), [Grandle](https://junit.org/junit5/docs/current/user-guide/#running-tests-build-gradle), [Maven](https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven) ашиглан тест эхлүүлэх боломжтой
 - Junit Jupiter
-    - Шинэ программ, өрөглөлын загварын хослол юм.
+    - Шинэ програм, өргөтгөл загварын хослол юм.
 - Junit Vintange
     - Junit 3, 4-т зориулсан `TestEngine` юм.
 
